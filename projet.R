@@ -28,12 +28,11 @@ text(V[,1], V[,2], seq(nbDoc), pos=2, col="red")
 
 VS <- V%*%S
 
-matrice <- matrix(textes)
+matrice <- as.matrix(rbind(tdm))
 #NMF
-P <- nmf(x = matrice, nbDoc)
-Y <- P$y
-K <- P$k
+P <- nmf(x = matrice, 2)
+Y <- P$Terms
 M <- diag(P$d)
 
-plot(V[,1], V[,2], main= "Graph of terms", pch=20, col=1)
-text(V[,1], V[,2], seq(nbDoc), pos=2, col="red")
+plot(Y[1,], Y[2,], main= "Graph of terms", pch=20, col=1)
+text(Y[1,], Y[2,], seq(nbDoc), pos=2, col="red")
