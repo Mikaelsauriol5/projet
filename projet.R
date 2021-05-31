@@ -28,8 +28,9 @@ text(V[,1], V[,2], seq(nbDoc), pos=2, col="red")
 
 VS <- V%*%S
 
+matrice <- matrix(textes)
 #NMF
-P <- nmf(X)
+P <- nmf(x = matrice, nbDoc)
 Y <- P$y
 K <- P$k
 M <- diag(P$d)
