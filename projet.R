@@ -12,6 +12,8 @@ textes <- tm_map(textes, removePunctuation)
 textes <- tm_map(textes, removeNumbers)
 textes <- tm_map(textes, removeWords, stopwords("english"))
 
+length(stopwords("english"))
+stopwords("english")
 tdm <- TermDocumentMatrix(textes)
 nbDoc <- length(textes)
 
@@ -30,9 +32,6 @@ VS <- V%*%S
 
 matrice <- as.matrix(rbind(tdm))
 #NMF
-P <- nmf(x = matrice, 2)
-Y <- P$Terms
-M <- diag(P$d)
+P <- nmf(matrice, 2, method='brunet', nrun=10, seed=123456)
 
-plot(Y[1,], Y[2,], main= "Graph of terms", pch=20, col=1)
-text(Y[1,], Y[2,], seq(nbDoc), pos=2, col="red")
+profplot(P)
